@@ -93,9 +93,9 @@ const getCitiesHandler = (request, response) => {
 
 // -- GET CITIES INFO HANDLER -------------------
 const getCitiesInfoHandler = (request, response) => {
-  const url = URL.parse(request.url);
-  const {id} = url
-  console.log(id,url)
+  const {query} = URL.parse(request.url);
+  const {id} = querystring.parse(query)
+
     getCitiesInfo(id,(error, Info) => {
         if(error){
           serverError(request,response);

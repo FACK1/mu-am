@@ -6,7 +6,15 @@ module.exports=(id,cb)=> {
     if (error){
         cb(error);
     }else {
-      cb(null,result.rows);
+      db_connection.query('select name_visitor, post_content from post where city_id = $1',[id],(err,res)=>{
+        if (err){
+          cb(err);
+          console.log(err)
+      }else {
+        console.log(res)
+        result.rows.push(res.rows)
+        cb(null,result.rows)};
+      })
     }
   });
 };
