@@ -2,6 +2,10 @@
 // -- required --------------------------
 const path = require('path');
 const fs = require('fs');
+const querystring = require('querystring');
+
+// const data = require('./queries/getData');
+const setData = require('./queries/setData');
 
 // -- Error 404 -------------------------
 const errorNotFound = (request, response) => {
@@ -47,7 +51,25 @@ const publicHandler = (request, response) => {
 };
 
 // -- ADD POST Handler ------------------------
-
-
+const addPostHandler = (request,response) =>{
+  let body='';
+  request.on('data', chunk =>{
+    body+= chunk.toString();
+  });
+  request.on('end', ()=>{
+    let {cityID, visitorName, postContent} = querystring.parse(body);
+    //  insert to db
+    setData(cityID, visitorName, postContent, (error)=>{
+      if (error) {
+          response.writeHead(500, {'content-type': 'text/html'});
+          response.end('<h1> Server has moshkole </h1>')
+          console.log(error);
+      }else {
+          response.writeHead(302, {'Location': '/'});
+          response.end();
+      }
+    });
+  });
+}
 // -- Export handlers -------------------
-module.exports = {errorNotFound , homeHandler, publicHandler}
+module.exports = {errorNotFound , homeHandler, publicHandler, addPostHandler}

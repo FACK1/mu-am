@@ -15,7 +15,9 @@ const router = (request, response)=> {
             handlers.publicHandler(request,response)
     }
     //-----ADD POST Endpoint-----------------------------------------------------
-    // to do get cities and set data 
+    else if (request.url === '/addpost'){
+            handlers.addPostHandler(request,response)
+    }
     //-----Error Endpoint-------------------------------------------------------
     else {
             handlers.errorNotFound(request,response)
