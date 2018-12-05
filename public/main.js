@@ -23,6 +23,8 @@ document.getElementById("select_city").onchange = (event) =>{
         return response.json();
     })
     .then((city)=>{
+      document.getElementById("city_id").value=city[0].id;
+
         console.log(city);
         let cityinfo = document.getElementById('cityReviews');
         cityinfo.innerText = "";
@@ -33,7 +35,7 @@ document.getElementById("select_city").onchange = (event) =>{
         cPop.innerText = "Population : " + city[0].city_pop + " NFR";
         let cArea = document.createElement('li');
         cArea.innerText = "City Area : " + city[0].city_area + " km²";
-        
+
         cul.appendChild(cName);
         cul.appendChild(cPop);
         cul.appendChild(cArea);
@@ -42,26 +44,26 @@ document.getElementById("select_city").onchange = (event) =>{
         if(city[1].length>0)
         {
             let postsul = document.createElement('ul');
-           
+
             city[1].forEach(element =>{
                 let visitorName = document.createElement('li');
                 visitorName.innerText = " By: " + element.name_visitor;
                 let postContent = document.createElement('li');
                 postContent.innerText = element.post_content;
-                
+
                 postsul.appendChild(visitorName);
                 postsul.appendChild(postContent);
             })
             cityinfo.appendChild(postsul);
-           
-    
+
+
         }
         else{
-            
+
             let noReviews = document.createElement('h2');
-            noReviews.innerText = "No Reviews"; 
+            noReviews.innerText = "No Reviews";
             cityinfo.appendChild(noReviews);
-            
+
         }
 
 
