@@ -1,3 +1,4 @@
+var list = document.getElementById("select_city");
 fetch('/getcities')
 .then(response => {
     return response.json();
@@ -11,3 +12,17 @@ fetch('/getcities')
         list.appendChild(op);
     });
 })
+
+document.getElementById("select_city").onchange = (event) =>{
+    // You can use “this” to refer to the selected element.
+
+    let id = event.target.value;
+    console.log(id);
+    fetch('/getcitiesinfo?id='+id)
+    .then(response => {
+        return response.json();
+    })
+    .then((city)=>{
+      console.log(city);
+    })
+}

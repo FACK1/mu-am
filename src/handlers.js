@@ -2,14 +2,24 @@
 // -- required --------------------------
 const path = require('path');
 const fs = require('fs');
+const URL = require('url');
+
 const querystring = require('querystring');
 const getCities = require('./queries/getCities');
+const getCitiesInfo = require('./queries/getCitiesInfo');
 const setData = require('./queries/setData');
+
 
 // -- Error 404 -------------------------
 const errorNotFound = (request, response) => {
     response.writeHead(404, {'Content-Type' : 'text/html'});
     response.end('<h1>Page Not Found : Error 404</h1>');
+};
+
+// -- Error 505 -------------------------
+const serverError = (request, response) => {
+    response.writeHead(505, {'Content-Type' : 'text/html'});
+    response.end('<h1> Server has Moseba : Error 505 </h1>');
 };
 
 // -- Home Handler ----------------------
@@ -60,9 +70,7 @@ const addPostHandler = (request,response) =>{
     //  insert to db
     setData(cityID, visitorName, postContent, (error)=>{
       if (error) {
-          response.writeHead(500, {'content-type': 'text/html'});
-          response.end('<h1> Server has moshkole </h1>')
-          console.log(error);
+          serverError(request,response);
       }else {
           response.writeHead(302, {'Location': '/'});
           response.end();
@@ -70,17 +78,32 @@ const addPostHandler = (request,response) =>{
     });
   });
 }
+
 // -- GET CITIES HANDLER -------------------
 const getCitiesHandler = (request, response) => {
     getCities((error, result) => {
         if(error){
-            console.log(error)
-            return errorNotFound(error, response)
+          serverError(request,response);
         }
       response.writeHead(200, {'Content-Type': 'application/json'});
       response.end(JSON.stringify(result));
-    
+
     });
 }
+
+// -- GET CITIES INFO HANDLER -------------------
+const getCitiesInfoHandler = (request, response) => {
+  const url = URL.parse(request.url);
+  const {id} = url
+  console.log(id,url)
+    getCitiesInfo(id,(error, Info) => {
+        if(error){
+          serverError(request,response);
+        }
+      response.writeHead(200, {'Content-Type': 'application/json'});
+      response.end(JSON.stringify(Info));
+    });
+}
+
 // -- Export handlers -------------------
-module.exports = {errorNotFound , homeHandler, publicHandler, addPostHandler, getCitiesHandler}
+module.exports = {errorNotFound , homeHandler,serverError, publicHandler, addPostHandler, getCitiesHandler, getCitiesInfoHandler}
