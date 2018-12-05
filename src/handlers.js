@@ -66,10 +66,12 @@ const addPostHandler = (request,response) =>{
     body+= chunk.toString();
   });
   request.on('end', ()=>{
-    let {cityID, visitorName, postContent} = querystring.parse(body);
+    console.log("body is",body)
+    let {id, visitorName, postContent} = querystring.parse(body);
     //  insert to db
-    setData(cityID, visitorName, postContent, (error)=>{
+    setData(id, visitorName, postContent, (error)=>{
       if (error) {
+          console.log(error)
           serverError(request,response);
       }else {
           response.writeHead(302, {'Location': '/'});
