@@ -3,8 +3,7 @@
 const path = require('path');
 const fs = require('fs');
 const querystring = require('querystring');
-
-// const data = require('./queries/getData');
+const getCities = require('./queries/getCities');
 const setData = require('./queries/setData');
 
 // -- Error 404 -------------------------
@@ -71,5 +70,17 @@ const addPostHandler = (request,response) =>{
     });
   });
 }
+// -- GET CITIES HANDLER -------------------
+const getCitiesHandler = (request, response) => {
+    getCities((error, result) => {
+        if(error){
+            console.log(error)
+            return errorNotFound(error, response)
+        }
+      response.writeHead(200, {'Content-Type': 'application/json'});
+      response.end(JSON.stringify(result));
+    
+    });
+}
 // -- Export handlers -------------------
-module.exports = {errorNotFound , homeHandler, publicHandler, addPostHandler}
+module.exports = {errorNotFound , homeHandler, publicHandler, addPostHandler, getCitiesHandler}

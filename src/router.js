@@ -16,7 +16,10 @@ const router = (request, response)=> {
     }
     //-----ADD POST Endpoint-----------------------------------------------------
     else if (request.url === '/addpost'){
-            handlers.addPostHandler(request,response)
+            handlers.addPostHandler(request,response)                                                                                   
+   //-----GET CITY Endpoint-------------------------------------------------------
+    } else if(request.url === '/getcities'){
+        handlers.getCitiesHandler(request,response)
     }
     //-----Error Endpoint-------------------------------------------------------
     else {
