@@ -4,9 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "tape src/test.js | tap-spec",
     "dev": "nodemon src/server.js",
-    "start": "node src/server.js"
+    "start": "node src/server.js",
+    "lint": "eslint ./",
+    "lint-fix": "eslint --fix ./",
+    "istanbul": "istanbul cover tape src/test.js"
   },
   "repository": {
     "type": "git",
@@ -20,9 +23,21 @@
   "homepage": "https://github.com/FACK1/mu-am#readme",
   "dependencies": {
     "env2": "^2.2.2",
-    "pg": "^7.7.1"
+    "pg": "^7.7.1",
+    "supertest": "^3.3.0"
   },
   "devDependencies": {
-    "nodemon": "^1.18.7"
+    "eslint": "^5.9.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^8.0.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "istanbul": "^0.4.5",
+    "jshint": "^2.9.6",
+    "nodemon": "^1.18.7",
+    "tap-spec": "^5.0.0",
+    "tape": "^4.9.1"
   }
 }
