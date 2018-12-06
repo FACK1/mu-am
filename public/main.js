@@ -29,6 +29,7 @@ document.getElementById("select_city").onchange = (event) =>{
         let cityinfo = document.getElementById('cityReviews');
         cityinfo.innerText = "";
         let cul = document.createElement('ul');
+        cul.setAttribute('id','info');
         let cName = document.createElement('li');
         cName.innerText = "City Name : " + city[0].city_name;
         let cPop = document.createElement('li');
@@ -44,15 +45,13 @@ document.getElementById("select_city").onchange = (event) =>{
         if(city[1].length>0)
         {
             let postsul = document.createElement('ul');
+            postsul.setAttribute('id','post');
 
             city[1].forEach(element =>{
-                let visitorName = document.createElement('li');
-                visitorName.innerText = " By: " + element.name_visitor;
-                let postContent = document.createElement('li');
-                postContent.innerText = element.post_content;
+                let visitorPost = document.createElement('li');
+                visitorPost.innerText = "By " + element.name_visitor + " :  ' " + element.post_content + " '";
 
-                postsul.appendChild(visitorName);
-                postsul.appendChild(postContent);
+                postsul.appendChild(visitorPost);
             })
             cityinfo.appendChild(postsul);
 

@@ -3,27 +3,32 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Palestine Cities</title>
+    <title>Palestinian Cities</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="public/style.css" />
 
 </head>
 <body>
+    <header>Palestinian Cities</header>
   <br>
   <form class="form" id="select_form" action="/addpost" method="post">
     <select id="select_city">
         <option> Select City</option>
     </select>
+    <br><br>
       <input type="text" name="visitorName" value="" placeholder="Your Name">
-      <input type="text" name="postContent" value="" placeholder="Leave your post...">
+      <br>
+      <input id="post1" type="text" name="postContent" value="" placeholder="Leave your post...">
        <input type="number" id="city_id" name="id"/>
+       <br>
       <button type="submit" name="button">Add your post</button>
   </form>
-  <section id="container">
+  <br>
+  
       <div id="cityReviews">
 
       </div>
-  </section>
+ 
   <script src="public/main.js"></script>
 </body>
 </html>
