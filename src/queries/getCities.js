@@ -1,6 +1,6 @@
 const db_connection = require("../database/db_connection");
 
-module.exports=(cb)=> {
+const runDbBuild =(cb)=> {
   db_connection.query(
     'select id, city_name from city', (error, result)=>{
     if (error){
@@ -10,3 +10,4 @@ module.exports=(cb)=> {
     }
   });
 };
+module.exports= runDbBuild;

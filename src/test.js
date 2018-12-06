@@ -1,7 +1,8 @@
 const test = require('tape')
 const supertest = require('supertest')
 const router = require('./router')
-const getcity = require('./queries/getcities')
+const getcity = require('./queries/getCities')
+const runDbBuild = require('./database/db_build.js')
 
 test('Testing ON', function (t) {
   t.deepEqual(2, 2, 'ON')
@@ -72,8 +73,8 @@ test('Testing GET CITIES Endpoint', (t) => {
 
   test("GET CITIES", t => {
     runDbBuild(function(err, res) {
-      t.error(err, "No Error"); 
-  
+      t.error(err, "No Error");
+
       let expected = [
         {
           id: 1,
@@ -82,12 +83,12 @@ test('Testing GET CITIES Endpoint', (t) => {
           city_area: 125
         }
       ];
-  
+
       getcity((err, result) => {
         if (err) console.log(err);
         t.deepEqual(result, expected, "Returns expected GET CITIES");
-        t.end();
+
       });
     });
+    t.end();
   });
-  
