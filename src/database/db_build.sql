@@ -11,7 +11,7 @@ CREATE TABLE city (
 
 CREATE TABLE post (
   id            SERIAL  PRIMARY KEY,
-  city_id       INTEGER  NOT NULL,
+  city_id       INT REFERENCES city,
   name_visitor  VARCHAR(255) default 'Anonymous',
   post_content  TEXT NOT NULL
 );
