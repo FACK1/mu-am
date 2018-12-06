@@ -41,7 +41,8 @@ const publicHandler = (request, response) => {
     const contentTypeMapping = {
         html : 'text/html',
         css  : 'text/css',
-        js   : 'application/js'
+        js   : 'application/js',
+        jpg  : 'image'
     };
     if(!contentTypeMapping[extention]){
         response.writeHead(404, {'Content-Type' : 'text/html'});
